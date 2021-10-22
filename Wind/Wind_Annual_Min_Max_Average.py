@@ -1,9 +1,9 @@
 from matplotlib import pyplot as plt
-from Wind_PreProcessing import pre_processing
+from Wind_PreProcessing import pre_processing as wind_pre_processing
 from Helpers.Yearly_Splicer import yearly_splicer
 import pandas as pd
 
-wind_data = pre_processing()
+wind_data = wind_pre_processing()
 annual_data = yearly_splicer(wind_data)
 
 annual_average_dict = {}

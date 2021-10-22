@@ -1,11 +1,11 @@
 from matplotlib import pyplot as plt
-from Wind_PreProcessing import pre_processing
+from Wind_PreProcessing import pre_processing as wind_pre_processing
 from Helpers.Monthly_Splicer import monthly_splicer
 import pandas as pd
 
 year_wanted = 2010
 
-wind_data = pre_processing()
+wind_data = wind_pre_processing()
 monthly_data = monthly_splicer(wind_data, year_wanted)
 
 monthly_average_dict = {}

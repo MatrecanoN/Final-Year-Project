@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def power_preprocessing():
+def pre_processing():
 	data_input = pd.read_csv(
 		"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Clean Grid Data.csv", delimiter=",")
 
