@@ -18,10 +18,6 @@ def pre_processing():
 
 	installed_wind_capacity = pd.Series(data=installed_wind_capacity_raw.tolist(), index=wind_data_series.index)
 
-	power_demand_raw = (data_input["POWER_ESPENI_MW"]).tolist()
-	power_demand = pd.Series(data=power_demand_raw, index=wind_data_series.index)
-	power_demand_rolling = power_demand.rolling(17532, min_periods=1).mean()
-
 	wind_raw_data_filtered = []
 	wind_data_filtered_dates = []
 
