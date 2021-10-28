@@ -10,10 +10,12 @@ wind_data_yearly_rolling_average = wind_data_filtered.rolling(17532, min_periods
 plt.plot(wind_data_filtered, color="blue")
 plt.plot(wind_data_daily_rolling_average, color="black")
 plt.plot(wind_data_weekly_rolling_average, color="red")
-plt.plot(wind_data_yearly_rolling_average, color="yellow")
+plt.plot(wind_data_yearly_rolling_average, color="orange")
 
 plt.xlabel("Date and Time of Generation")
 plt.ylabel("% of Installed Capacity Utilisation")
 plt.grid()
+plt.legend(["Raw Data", "24 Hour Rolling Average", "7 Day Rolling Average", "365 Day Rolling Average"])
+plt.title("Total Wind Generation Utilisation by Data Entry (30 Minute Granular)")
 
 plt.show()

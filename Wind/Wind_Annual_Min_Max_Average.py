@@ -24,5 +24,8 @@ plt.plot(annual_average, color="black")
 plt.bar(annual_min.index, annual_min.values, color="white")
 
 plt.title(label="Low/High and Average of Wind Generation as % of Capacity")
+plt.xlabel("Date and Time of Generation")
+plt.ylabel("% of Installed Capacity Utilisation")
+plt.legend(["Annual Average", "Annual Range of Recorded Generation"])
 
 plt.show()
