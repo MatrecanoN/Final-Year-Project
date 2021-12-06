@@ -76,4 +76,5 @@ for dates in installed_wind_capacity.index:
 plt.plot(installed_wind_capacity)
 plt.show()
 
-installed_wind_capacity.to_csv("Data Sources\Interpolated Wind Capacity Data.csv", index=False)
+installed_wind_capacity.to_csv(
+	"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Interpolated Wind Capacity Data.csv", index=False)
