@@ -14,5 +14,8 @@ scenario_frame_summed = scenario_frame_collected.groupby(level=0).sum()
 plt.plot(scenario_frame_summed)
 plt.legend(scenario_frame_summed.columns)
 plt.grid()
+plt.ylabel("Solar Installed Capacity (MW)")
+plt.xlabel("Year")
+plt.title("Future Energy Scenario Total Solar Generator Installed Capacity")
 
 plt.show()

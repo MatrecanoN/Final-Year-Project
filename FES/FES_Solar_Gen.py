@@ -16,5 +16,7 @@ plt.plot(scenario_frame_large)
 plt.plot(scenario_frame_small)
 plt.legend(legend_labels)
 plt.grid()
+plt.ylabel("Solar Installed Capacity (MW)")
+plt.xlabel("Year")
 
 plt.show()

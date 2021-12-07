@@ -8,4 +8,9 @@ scenario_frame = block_data_packager(block_target)
 
 plt.plot(scenario_frame)
 plt.legend(scenario_frame.columns)
+plt.grid()
+plt.ylabel("Total Demand (GWh)")
+plt.xlabel("Year")
+plt.title("Future Energy Scenario Future Demands")
+
 plt.show()

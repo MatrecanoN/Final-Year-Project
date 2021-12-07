@@ -17,4 +17,8 @@ plt.plot(scenario_frame_IC)
 
 plt.legend(legend_labels)
 plt.grid()
+plt.ylabel("Heating Electricity Demand (GWh)")
+plt.xlabel("Year")
+plt.title("Future Energy Scenario Heat Pump Demands")
+
 plt.show()

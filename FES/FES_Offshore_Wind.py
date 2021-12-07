@@ -2,11 +2,19 @@ from FES_Isolator import block_data_packager
 from matplotlib import pyplot as plt
 
 # Insert target block from excel list
-block_target = "Gen_BB014"
-scenario_frame = block_data_packager(block_target)
+block_target_on_grid = "Gen_BB015"
+scenario_frame_on_grid = block_data_packager(block_target_on_grid)
 
-plt.plot(scenario_frame)
-plt.legend(scenario_frame.columns)
+block_target_off_grid = "Gen_BB016"
+scenario_frame_off_grid = block_data_packager(block_target_off_grid)
+
+scenario_frame_collected = scenario_frame_on_grid.append(scenario_frame_off_grid)
+scenario_frame_summed = scenario_frame_collected.groupby(level=0).sum()
+
+plt.plot(scenario_frame_summed)
+plt.legend(scenario_frame_summed.columns)
 plt.grid()
+plt.ylabel("Offshore Wind Installed Capacity (MW)")
+plt.xlabel("Year")
 
 plt.show()
