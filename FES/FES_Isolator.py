@@ -2,8 +2,6 @@ import pandas as pd
 
 
 def pre_processing(block_id, scenario):
-	if block_id[0] == "D" and scenario[0] == "L":
-		scenario = "Leading the Way"
 
 	data_input = pd.read_csv("C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/FES-Block-Data.csv")
 
