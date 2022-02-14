@@ -11,7 +11,7 @@ def pre_processing(block_id, scenario):
 	counter = 0
 	summed_values = []
 
-	while counter < 30:
+	while counter <= 30:
 		if counter == 0:
 			summed_values.append(sum(isolated_scenario_block["Baseline (2020)"]))
 		else:
@@ -20,7 +20,7 @@ def pre_processing(block_id, scenario):
 
 		counter += 1
 
-	data_series = pd.Series(data=summed_values, index=range(2020, 2050, 1), name=scenario)
+	data_series = pd.Series(data=summed_values, index=range(2020, 2051, 1), name=scenario)
 
 	return data_series
 
@@ -28,7 +28,7 @@ def pre_processing(block_id, scenario):
 def block_data_packager(block_target):
 	scenario_list = ["Leading The Way", "Consumer Transformation", "System Transformation", "Steady Progression"]
 
-	scenario_frame = pd.DataFrame(index=range(2020, 2050, 1), columns=scenario_list)
+	scenario_frame = pd.DataFrame(index=range(2020, 2051, 1), columns=scenario_list)
 
 	for scenarios in scenario_list:
 		block_data = pre_processing(block_target, scenarios)

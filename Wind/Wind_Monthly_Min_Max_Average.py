@@ -2,16 +2,14 @@ from matplotlib import pyplot as plt
 from Wind_PreProcessing import pre_processing as wind_pre_processing
 from Helpers.Monthly_Splicer import monthly_splicer
 import pandas as pd
-import numpy as np
 
 
-wind_data = wind_pre_processing()
+wind_data = wind_pre_processing() * 100
 
 first_year = wind_data.index[0].year
 last_year = wind_data.index[-1].year
 
 year_list = range(first_year, last_year + 1, 1)
-zero_to_one = [round((x * 0.1), 1) for x in range(0, 11, 2)]
 
 for years in year_list:
 	plt.subplot(4, 3, (years - first_year) + 1)
@@ -38,7 +36,10 @@ for years in year_list:
 	plt.ylabel("% Generation")
 	plt.title(label="Year: {YEAR}".format(YEAR=years))
 	plt.xticks(range(1, 13, 1), range(1, 13, 1))
-	plt.yticks(zero_to_one, zero_to_one)
+	plt.yticks(range(0, 81, 20))
+	plt.grid()
 
 plt.subplots_adjust(hspace=1)
+plt.suptitle("Low/High and Average Wind Generation Utilisation by Month and Year", fontsize=20)
+
 plt.show()

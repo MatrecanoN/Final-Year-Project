@@ -66,11 +66,49 @@ for dates in accumulated_data.index:
 	else:
 		annual_percentage_per_day_leap = annual_percentage_per_day_leap.append(new_percentage_data)
 
+min_per_day_non_leap = annual_percentage_per_day.groupby(level=0).min()
+min_per_day_leap = annual_percentage_per_day_leap.groupby(level=0).min()
+
+max_per_day_non_leap = annual_percentage_per_day.groupby(level=0).max()
+max_per_day_leap = annual_percentage_per_day_leap.groupby(level=0).max()
+
 annual_percentage_per_day = annual_percentage_per_day.groupby(level=0).mean()
 annual_percentage_per_day_leap = annual_percentage_per_day_leap.groupby(level=0).mean()
 
-annual_percentage_per_day.to_csv(
-	"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Average Year Demand Data Non-Leap.csv")
+# Uncomment for non-leap years
+"""min_series = min(min_per_day_non_leap / annual_percentage_per_day) * annual_percentage_per_day
+max_series = max(max_per_day_non_leap / annual_percentage_per_day) * annual_percentage_per_day
 
-annual_percentage_per_day_leap.to_csv(
-	"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Average Year Demand Data Leap.csv")
+ticks = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 364]
+legend = ["Average recorded demand", "Region of potential demand"]
+plt.xticks(ticks, fontsize=15)
+plt.yticks(fontsize=15)
+plt.xlabel("Date", fontsize=20)
+plt.ylabel("Baseline Demand as Percentage of Annual Total (%)", fontsize=18)
+plt.title("Min/Max and Average Baseline Demand as a Percentage of Annual Total", fontsize=20)
+
+plt.fill_between(min_series.index, min_series.values, max_series.values)
+plt.plot(annual_percentage_per_day, color="black")
+plt.grid()
+plt.legend(legend, fontsize=12)
+
+plt.show()"""
+
+# Uncomment for leap years
+min_series = min(min_per_day_leap / annual_percentage_per_day_leap) * annual_percentage_per_day_leap
+max_series = max(max_per_day_leap / annual_percentage_per_day_leap) * annual_percentage_per_day_leap
+
+ticks = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 365]
+legend = ["Average recorded generation", "Region of potential generation"]
+plt.xticks(ticks, fontsize=15)
+plt.yticks()
+plt.xlabel("Date", fontsize=20)
+plt.ylabel("Baseline Demand as Percentage of Annual Total (%)", fontsize=18)
+plt.title("Min/Max and Average Baseline Demand as a Percentage of Annual Total - Leap Year", fontsize=20)
+
+plt.fill_between(min_series.index, min_series.values, max_series.values)
+plt.plot(annual_percentage_per_day_leap, color="black")
+plt.grid()
+plt.legend(legend, fontsize=12)
+
+plt.show()

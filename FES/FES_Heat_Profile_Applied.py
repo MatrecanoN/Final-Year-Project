@@ -1,34 +1,41 @@
-import pandas as pd
-from FES_Baseline_Demand import baseline_demand
-from datetime import datetime
+from FES_Isolator import block_data_packager
 from matplotlib import pyplot as plt
+import pandas as pd
+from datetime import datetime
 
 
-def electrical_demand_profiled():
+def heat_demand_profiled():
+	# Insert target block from excel list
+	block_target_residential = "Dem_BB004"
+	scenario_frame_residential = block_data_packager(block_target_residential)
+
+	block_target_IC = "Dem_BB005"
+	scenario_frame_IC = block_data_packager(block_target_IC)
+
+	scenario_frame_combined = scenario_frame_IC + scenario_frame_residential
+
 	data_input_leap = pd.read_csv(
-		"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Average Year Demand Data Leap.csv",
-		delimiter=",",
+		"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Average Year Heat Data Leap.csv", delimiter=",",
 		index_col=0, squeeze=True)
 
 	data_input_non_leap = pd.read_csv(
-		"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Average Year Demand Data Non-Leap.csv",
+		"C:/Users/matre/PycharmProjects/Final Year Project/Data Sources/Average Year Heat Data Non-Leap.csv",
 		delimiter=",",
 		index_col=0, squeeze=True)
 
 	leap_years = [2008, 2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048]
 
-	demand_block = baseline_demand()
-	leading_the_way_annual = demand_block["Leading The Way"]
-	consumer_transformation_annual = demand_block["Consumer Transformation"]
-	system_transformation_annual = demand_block["System Transformation"]
-	steady_progression_annual = demand_block["Steady Progression"]
+	leading_the_way_annual = scenario_frame_combined["Leading The Way"]
+	consumer_transformation_annual = scenario_frame_combined["Consumer Transformation"]
+	system_transformation_annual = scenario_frame_combined["System Transformation"]
+	steady_progression_annual = scenario_frame_combined["Steady Progression"]
 
 	leading_the_way_day = pd.Series()
 	consumer_transformation_day = pd.Series()
 	system_transformation_day = pd.Series()
 	steady_progression_day = pd.Series()
 
-	for years in demand_block.index:
+	for years in scenario_frame_combined.index:
 		if years not in leap_years:
 			current_year_l = pd.Series(data=(data_input_non_leap.values / 100) * leading_the_way_annual[years],
 									   index=data_input_non_leap.index + "-" + str(years))
@@ -74,14 +81,13 @@ def electrical_demand_profiled():
 	return leading_the_way_day, consumer_transformation_day, system_transformation_day, steady_progression_day
 
 
-"""leading_the_way_day, consumer_transformation_day, system_transformation_day, steady_progression_day = electrical_demand_profiled()
-
+"""leading_the_way_day, consumer_transformation_day, system_transformation_day, steady_progression_day = heat_demand_profiled()
 plt.subplot(2, 2, 1)
 plt.plot(leading_the_way_day)
 plt.grid()
-plt.title("Leading the Way", fontsize=20)
-plt.xlabel("Date", fontsize=20)
-plt.ylabel("Demand (GWh / Day)", fontsize=20)
+plt.title("Leading the Way")
+plt.xlabel("Date")
+plt.ylabel("Demand (GWh / Day)")
 
 plt.subplot(2, 2, 2)
 plt.plot(consumer_transformation_day)
@@ -105,7 +111,7 @@ plt.xlabel("Date")
 plt.ylabel("Demand (GWh / Day)")
 
 
-plt.suptitle("FES Baseline Power Demand Predictions with Historic Seasonal Profile Applied - Tighter View", fontsize=20)
+plt.suptitle("FES HP Power Demand Predictions with Historic Seasonal Profile Applied", fontsize=20)
 plt.subplots_adjust(hspace=0.5)
 
 plt.show()

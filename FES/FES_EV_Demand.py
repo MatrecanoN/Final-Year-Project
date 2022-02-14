@@ -14,10 +14,14 @@ scenario_frame_IC = block_data_packager(block_target_IC)
 
 plt.plot(scenario_frame_residential)
 plt.plot(scenario_frame_IC)
-plt.legend(legend_labels)
-plt.ylabel("Transport Electricity Demand (GWh)")
-plt.xlabel("Year")
+plt.legend(legend_labels, fontsize=15)
+plt.ylabel("Transport Electricity Demand (GWh)", fontsize=20)
+plt.xlabel("Date", fontsize=20)
 plt.grid()
-plt.title("Future Energy Scenario Electric Vehicle Demands")
+plt.title("Future Energy Scenario Electric Vehicle Demands", fontsize=20)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
 
 plt.show()
+
+
